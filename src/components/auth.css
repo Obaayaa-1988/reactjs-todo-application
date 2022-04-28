@@ -1,0 +1,110 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Abel&family=Assistant:wght@200&family=Corinthia:wght@700&family=Cormorant+Garamond:wght@300&family=Kalam:wght@300&family=Oswald:wght@200&family=Poppins&family=Tajawal:wght@200;300;400&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+}
+body{
+  font-family: "Oswald";
+}
+/* 
+.back{
+  background-color: aqua;
+  height: 700px;
+} */
+/*styling the form*/
+.back{
+  background-image: url(/src/image/pho1.jpg);
+  height: 120vh;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  margin-top: -6.1rem;
+}
+
+.outer-form{
+    max-width: 28rem;
+    height: 37rem;
+    background-color: rgb(49, 48, 48);
+    margin: 100px auto;
+    border-radius: 10px;
+    padding-top: 2rem;
+    
+  }
+  
+  form input{
+    display: block;
+    width: 70%;
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 0;
+    border-radius: 5px;
+    margin-left: 3rem;
+    font-weight: bolder;
+    font-family: 'Oswald';
+    font-size: 1.1rem;
+    outline: none;
+  
+  }
+  
+  .outer-form h4{
+    color: white;
+    text-align: center;
+    padding-top: 1rem;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .outer-form i{
+    color: rgb(255,215,0);
+    font-size: 3rem;
+    margin-left: 12rem;
+  }
+  
+  
+  
+   form textarea{
+    margin-left: 3rem;
+    margin-top: 2rem;
+  } 
+  
+  .outer-form button{
+    padding: 0.7rem 2.1rem;
+    background-color: rgb(255,215,0);
+    color: #ffffff;
+    font-size: 1rem;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: 'Oswald';
+    margin-left: 10rem;
+    margin-top: 2rem;
+    font-weight: bolder;
+  }
+
+  .minibar a{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    margin-left: 2rem;
+  
+  }
+
+  .minibar{
+    text-align: center;
+  }
+
+  p{
+    color: white;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.outer-form a{
+  text-decoration: none;
+  color: white;
+  font-weight: bolder;
+}

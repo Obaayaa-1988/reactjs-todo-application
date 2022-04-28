@@ -1,13 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+// import './index.css';
+import './components/auth.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'; 
 import App from './App';
+import TodoRegister from './components/todoRegister';
+import TodoLogin from './components/todoLogin';
 import reportWebVitals from './reportWebVitals';
 
+
+
+
 ReactDOM.render(
+  <BrowserRouter>
   <React.StrictMode>
-    <App />
+    <Routes>
+    <Route path='/' element={<TodoLogin />} />
+    <Route path='/todoRegister' element={<TodoRegister />} />
+    <Route path='/app' element={<App />} />
+
+    </Routes>
+
   </React.StrictMode>,
+  </BrowserRouter>,
   document.getElementById('root')
 );
 
