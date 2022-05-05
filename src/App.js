@@ -10,6 +10,7 @@ import {  useNavigate } from 'react-router-dom'
 
 
 
+
 //App.js is our central point where we will put all our data and also the new incoming input input field where value or written t
 //todo from users will be added
 //todos= all combined single todo which is imported into app.js
@@ -93,12 +94,12 @@ function App() {
      const addTodo = async () => {
        try {
          setLoading(true)
-         const add = await axios.post(`http://localhost:8080/api/todos`, {
+         const add = await axios.post(`/api/todos/${JSON.parse(window.localStorage.getItem("id"))}`, {
            todo: input
          },
-         { withCredentials: true } 
+         //{ withCredentials: true } 
          
-         
+        
          );
          console.log(add.data)
 
@@ -122,8 +123,8 @@ function App() {
     try{
       setLoading(true)
 
-    const todo = await axios.delete(`http://localhost:8080/api/todo/${id}`,
-    { withCredentials: true } 
+    const todo = await axios.delete(`/api/todo/${id}`,
+   // { withCredentials: true } 
     
     )
     
@@ -141,29 +142,29 @@ function App() {
   const update = async (id) => {
     try {
       setLoadingg(true)
-      const todo = await axios.get(`http://localhost:8080/api/todo/${id}`,
-      { withCredentials: true } 
+      const todo = await axios.get(`/api/todo/${id}`,
+      //{ withCredentials: true } 
       
       );
       const { data } = todo;
 
       if(data.status === 'pending') {
-        await axios.put(`http://localhost:8080/api/todo/${data._id}`, {
+        await axios.put(`/api/todo/${data._id}`, {
 
         status: "done"
 
         },
-        { withCredentials: true } 
+       // { withCredentials: true } 
         
         );
 
       } else {
-        await axios.put(`http://localhost:8080/api/todo/${data._id}`, {
+        await axios.put(`/api/todo/${data._id}`, {
           status: "pending"
 
         },
 
-        { withCredentials: true } 
+        //{ withCredentials: true } 
         
         );
       }
@@ -183,15 +184,16 @@ function App() {
 
       useEffect(() => {
         const fetchTodos = async () => {
-          const todos = await axios.get(`http://localhost:8080/api/todos`,
-          { withCredentials: true } 
+          const todos = await axios.get(`/fetchUser/${JSON.parse(window.localStorage.getItem("id"))}`,
+          //{ withCredentials: true } 
           
           );
-          console.log("heyyy", todos)
+          
 
           const { data } = todos;
+          console.log( data)
 
-          setTodos(data)
+          setTodos(data.user.todos)
         };
         fetchTodos();
 
@@ -264,6 +266,7 @@ function App() {
     <div className="my-app">
       <h1>TO DO APP</h1>
       <hr/>
+      <p>Welcome <span>{JSON.parse(window.localStorage.getItem("username"))} </span></p>
 
       <div>
         <input type="text" className='my-input' placeholder='add a todo....' value={ input } onChange={(e) => setInput(e.target.value)} />

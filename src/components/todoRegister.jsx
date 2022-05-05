@@ -8,6 +8,8 @@ export default function TodoRegister() {
   const [ username, setUsername ] = useState("")
   const [ email, setEmail ] = useState("")
   const [ password, setPassword ] = useState("")
+  const [ errorMessage, setErrorMessage] = useState("")
+  
 
 //the backend is also structured to connect with the frontend using the localhost of the backend and axios
 //withCredentials means
@@ -29,12 +31,21 @@ export default function TodoRegister() {
 
       const { data } = response;
       console.log(data)
+      if(data === "Please enter an email"){
+        setErrorMessage(data)
+      }
+
+
+
       if(data.user) {
-        history("/app")
+        history("/")
       }
       
     } catch (error) {
       console.log(error)
+      if(error.message.includes('409')){
+        setErrorMessage('email already exist')
+      }
       
     }
   }
@@ -54,7 +65,9 @@ export default function TodoRegister() {
             onChange={(e) => setUsername(e.target.value)} />
 
             <input type="email" className='input2' placeholder="Email" value={email} 
-            onChange={(e) => setEmail(e.target.value)} />
+            onChange={(e) => setEmail(e.target.value)} /> 
+            <span style={{color: "red", marginLeft: "3rem" }}>{errorMessage}</span>
+            
 
             <input type="password" className='input2' placeholder="Password" value={password}
             onChange={(e) => setPassword(e.target.value)} />
@@ -63,7 +76,7 @@ export default function TodoRegister() {
             <input type="password" className='input2' placeholder=" Confirm Password" />
             <p> Been here before? <NavLink to="/">LogIn</NavLink></p>
 
-            <button type='submit' disabled={ !email || !password } onClick={ signup }>Sign In</button>
+            <button type='submit'  onClick={ signup }>Sign In</button>
 
           </form>
         </div>

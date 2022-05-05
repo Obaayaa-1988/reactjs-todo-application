@@ -4,11 +4,15 @@ import ReactDOM from 'react-dom';
 import './components/auth.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'; 
 import App from './App';
+import axios from 'axios';
 import TodoRegister from './components/todoRegister';
 import TodoLogin from './components/todoLogin';
 import reportWebVitals from './reportWebVitals';
 
+//baseurl where all 
+axios.defaults.baseURL = "http://localhost:8080/"
 
+axios.defaults.withCredentials = true;
 
 
 ReactDOM.render(

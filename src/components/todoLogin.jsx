@@ -23,6 +23,8 @@ export default function TodoLogin() {
       console.log(data)
       if(data.user) {
         history("/app")
+        window.localStorage.setItem("id", JSON.stringify(data.user._id))
+        window.localStorage.setItem("username", JSON.stringify(data.user.username))
       }
       
     } catch (error) {
