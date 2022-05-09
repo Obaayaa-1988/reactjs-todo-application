@@ -9,6 +9,7 @@ export default function TodoRegister() {
   const [ email, setEmail ] = useState("")
   const [ password, setPassword ] = useState("")
   const [ errorMessage, setErrorMessage] = useState("")
+ const [ passwordError, setPasswordError ] = useState("")
   
 
 //the backend is also structured to connect with the frontend using the localhost of the backend and axios
@@ -31,9 +32,18 @@ export default function TodoRegister() {
 
       const { data } = response;
       console.log(data)
-      if(data === "Please enter an email"){
-        setErrorMessage(data)
-      }
+
+      // if(data === "Please enter an email"){
+      //   setMailError(data)
+      // }
+
+      //  if(data === "Please enter an email"){
+      //    setErrorMessage(data)
+      //  }
+
+      //  if(data === "Please enter a password"){
+      //   setPasswordError(data)
+      // }
 
 
 
@@ -43,8 +53,17 @@ export default function TodoRegister() {
       
     } catch (error) {
       console.log(error)
+
       if(error.message.includes('409')){
         setErrorMessage('email already exist')
+      }
+
+      if(error.message.includes('400')){
+        setErrorMessage(' email required')
+      }
+
+      if(error.message.includes('400')){
+        setPasswordError(' password required')
       }
       
     }
@@ -66,11 +85,24 @@ export default function TodoRegister() {
 
             <input type="email" className='input2' placeholder="Email" value={email} 
             onChange={(e) => setEmail(e.target.value)} /> 
-            <span style={{color: "red", marginLeft: "3rem" }}>{errorMessage}</span>
+
+            {
+              !email && (
+                <span style={{color: "red", marginLeft: "3rem" }}>{errorMessage}</span>
+              )
+            }
             
 
             <input type="password" className='input2' placeholder="Password" value={password}
             onChange={(e) => setPassword(e.target.value)} />
+            {
+              !password && (
+                <span style={{color: "red", marginLeft: "3rem" }}>{passwordError}</span>
+
+
+              )
+            }
+
 
 
             <input type="password" className='input2' placeholder=" Confirm Password" />
