@@ -8,6 +8,7 @@ import axios from 'axios';
 import TodoRegister from './components/todoRegister';
 import TodoLogin from './components/todoLogin';
 import reportWebVitals from './reportWebVitals';
+import { ResetPassword } from './components/resetPassword';
 
 //baseurl where all 
 axios.defaults.baseURL = "http://localhost:8080/"
@@ -21,6 +22,7 @@ ReactDOM.render(
     <Routes>
     <Route path='/' element={<TodoLogin />} />
     <Route path='/todoRegister' element={<TodoRegister />} />
+    <Route path='/reset' element={<ResetPassword />} />
     <Route path='/app' element={<App />} />
 
     </Routes>

@@ -4,7 +4,7 @@ import axios from 'axios';
 //import { Link, Outlet } from 'react-router-dom';
 import './App.css';
 import Todos from './components/todos';
-import {  useNavigate } from 'react-router-dom'
+import {  Link, useNavigate } from 'react-router-dom'
 
 
 
@@ -192,8 +192,10 @@ function App() {
 
           const { data } = todos;
           console.log( data)
+          
 
           setTodos(data.user.todos)
+          console.log(data.user)
         };
         fetchTodos();
 
@@ -253,6 +255,8 @@ function App() {
     <div>
       
       <button className='btn1' onClick={logout}>logout</button> 
+      <Link to="/reset" style={{marginLeft:"1rem"}}> change password</Link>
+
      
 
       {/* <nav className='minibar'>
@@ -266,7 +270,7 @@ function App() {
     <div className="my-app">
       <h1>TO DO APP</h1>
       <hr/>
-      <p>Welcome <span>{JSON.parse(window.localStorage.getItem("username"))} </span></p>
+      {/* <p>Welcome <span>{JSON.parse(window.localStorage.getItem("username"))} </span></p> */}
 
       <div>
         <input type="text" className='my-input' placeholder='add a todo....' value={ input } onChange={(e) => setInput(e.target.value)} />

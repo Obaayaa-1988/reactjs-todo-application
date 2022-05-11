@@ -99,12 +99,8 @@ export default function TodoRegister() {
               !password && (
                 <span style={{color: "red", marginLeft: "3rem" }}>{passwordError}</span>
 
-
               )
             }
-
-
-
             <input type="password" className='input2' placeholder=" Confirm Password" />
             <p> Been here before? <NavLink to="/">LogIn</NavLink></p>
 

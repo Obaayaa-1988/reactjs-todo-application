@@ -31,10 +31,11 @@ export default function TodoLogin() {
 
       const { data } = response;
       console.log(data)
+      console.log(data.user)
       if (data.user) {
         history("/app")
-        window.localStorage.setItem("id", JSON.stringify(data.user._id))
-        window.localStorage.setItem("username", JSON.stringify(data.user.username))
+        window.localStorage.setItem("id", JSON.stringify(data.user))
+        // window.localStorage.setItem("username", JSON.stringify(data.user.username))
       }
 
     } catch (error) {
@@ -84,7 +85,7 @@ export default function TodoLogin() {
           <p> Don't have an account? <NavLink to="/todoRegister">SignUp</NavLink></p>
 
           <button type='submit' onClick={login}>LogIn</button>
-          <button>Reset Password</button>
+          
 
 
         </form>
