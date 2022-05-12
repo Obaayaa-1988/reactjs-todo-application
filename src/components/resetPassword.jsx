@@ -35,10 +35,9 @@ export const ResetPassword = () => {
   };
 
   return success ? (
-    <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-      <p>password successfully changed</p>
-      <p>login with new password</p>
-
+    <div className="back">
+      <h1>password successfully changed</h1>
+      <h2>login with new password</h2>
 
     </div>
   ) : (
