@@ -83,6 +83,8 @@ export default function TodoLogin() {
 
 
           <p> Don't have an account? <NavLink to="/todoRegister">SignUp</NavLink></p>
+          <p>  <NavLink to="/forgotPassword">Forgot Password?</NavLink></p>
+
 
           <button type='submit' onClick={login}>LogIn</button>
           

@@ -1,25 +1,35 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 
-export const ForgotPassword = () => {
+export const CurrentPassword = () => {
     const history = useNavigate();
 
-    const [email, setEmail] = useState("")
+    const [newPassword, setNewPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState("");
+
+    const { resetToken } = useParams;
 
 
     const change = async (e) => {
         try {
 
             e.preventDefault();
-            await axios.put(`/forgot-password/${email}`, {
+            await axios.put(`/${resetToken}/reset-password`, {
+                newPassword
 
             });
 
             setSuccess(true)
+
+            window.setTimeout(() => {
+                history('/');
+              }, 6000);
+        
+
 
         } catch (error) {
             console.log(error);
@@ -40,13 +50,16 @@ export const ForgotPassword = () => {
                 {error && <div>{error}
                 </div>}
                 <form onSubmit={change} >
-                    <h4>Forgot Password</h4>
+                    <h4>Add A New Password</h4>
                     <p style={{ color: "white" }}>Please enter your email and we will send you the a reset link</p>
 
-                    <input type="email" className='input2' placeholder="someone@gmail.com" value={email}
-                        onChange={(e) => setEmail(e.target.value)} />
+                    <input type="password" className='input2' placeholder=" New Password" value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)} />
 
-                    <button type='submit' >Send Link</button>
+                    <input type="password" className='input2' placeholder=" Confirm New Password" value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)} />
+
+                    <button type='submit' >Send</button>
 
 
 

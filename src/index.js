@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 // import './index.css';
 import './components/auth.css'
@@ -9,6 +9,8 @@ import TodoRegister from './components/todoRegister';
 import TodoLogin from './components/todoLogin';
 import reportWebVitals from './reportWebVitals';
 import { ResetPassword } from './components/resetPassword';
+import { ForgotPassword } from './components/forgotPassword';
+import { CurrentPassword } from './components/currentPassword';
 
 //baseurl where all 
 axios.defaults.baseURL = "http://localhost:8080/"
@@ -23,6 +25,10 @@ ReactDOM.render(
     <Route path='/' element={<TodoLogin />} />
     <Route path='/todoRegister' element={<TodoRegister />} />
     <Route path='/reset' element={<ResetPassword />} />
+    <Route path='/forgotPassword' element={<ForgotPassword />} />
+    <Route path='/reset-password/:resetToken' element={<CurrentPassword />} />
+
+
     <Route path='/app' element={<App />} />
 
     </Routes>
