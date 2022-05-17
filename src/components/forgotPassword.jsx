@@ -47,9 +47,6 @@ export const ForgotPassword = () => {
                         onChange={(e) => setEmail(e.target.value)} />
 
                     <button type='submit' >Send Link</button>
-
-
-
                 </form>
             </div>
 

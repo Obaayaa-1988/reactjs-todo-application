@@ -27,8 +27,6 @@ ReactDOM.render(
     <Route path='/reset' element={<ResetPassword />} />
     <Route path='/forgotPassword' element={<ForgotPassword />} />
     <Route path='/reset-password/:resetToken' element={<CurrentPassword />} />
-
-
     <Route path='/app' element={<App />} />
 
     </Routes>

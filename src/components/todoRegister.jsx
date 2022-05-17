@@ -7,6 +7,7 @@ export default function TodoRegister() {
   const history = useNavigate();
   const [ username, setUsername ] = useState("")
   const [ email, setEmail ] = useState("")
+  const[ emailError, setEmailError] =useState("")
   const [ password, setPassword ] = useState("")
   const [ errorMessage, setErrorMessage] = useState("")
  const [ passwordError, setPasswordError ] = useState("")
@@ -21,6 +22,13 @@ export default function TodoRegister() {
   const signup = async (e) => {
     try {
       e.preventDefault();
+      if(email === ''){
+        setEmailError("please enter your email")
+      } else if ( password === ''){
+        setPasswordError('password required')
+
+      }
+
       const response = await axios.post("http://localhost:8080/signup", {
         username,
         email,
@@ -34,7 +42,7 @@ export default function TodoRegister() {
       console.log(data)
 
       // if(data === "Please enter an email"){
-      //   setMailError(data)
+      //   setEmailError(data)
       // }
 
       //  if(data === "Please enter an email"){
@@ -44,7 +52,6 @@ export default function TodoRegister() {
       //  if(data === "Please enter a password"){
       //   setPasswordError(data)
       // }
-
 
 
       if(data.user) {
@@ -62,15 +69,12 @@ export default function TodoRegister() {
         setErrorMessage(' email required')
       }
 
-      if(error.message.includes('400')){
+      if(error.message.includes('409')){
         setPasswordError(' password required')
       }
       
     }
   }
-
-
-
 
   return (
     
@@ -83,9 +87,15 @@ export default function TodoRegister() {
             <input type="text" className='input1' placeholder="Username" value={username}
             onChange={(e) => setUsername(e.target.value)} />
 
-            <input type="email" className='input2' placeholder="Email" value={email} 
-            onChange={(e) => setEmail(e.target.value)} /> 
+            {
+              !email && (
+                <span style={{color: "red", marginLeft: "3rem" }}>{emailError}</span>
+              )
+            }
 
+            <input type="email" className='input2' placeholder="Email" value={email} 
+            onChange={(e) => setEmail(e.target.value)} />
+             
             {
               !email && (
                 <span style={{color: "red", marginLeft: "3rem" }}>{errorMessage}</span>

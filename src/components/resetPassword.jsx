@@ -14,6 +14,11 @@ export const ResetPassword = () => {
 
 
   const change = async (e) => {
+   if(newPassword !== confirmPassword){
+     return setError("password don\'t match");
+  
+   }
+     
     try {
 
       e.preventDefault();
@@ -23,19 +28,27 @@ export const ResetPassword = () => {
       });
 
       setSuccess(true)
+
       setTimeout(() => {
         history('/');
       }, 6000);
 
     } catch (error) {
-      console.log(error);
+      console.log(error.response);
       setError("something happened");
+      if( error.response.status === 400){
+        return setError(error.response.data.msg)
 
+      }
+      if( error.response.status === 401){
+        return setError(error.response.data.msg)
+
+      }
     }
   };
 
   return success ? (
-    <div className="back">
+    <div>
       <h1>password successfully changed</h1>
       <h2>login with new password</h2>
 
@@ -43,7 +56,9 @@ export const ResetPassword = () => {
   ) : (
     <div className='back'>
       <div className='outer-form'>
+
         {error && <div>{error}</div>}
+
         <form  onSubmit={change} >
           <h4>Reset Password</h4>
 
@@ -51,25 +66,19 @@ export const ResetPassword = () => {
 
           <input type="password" className='input2' placeholder="Old Password" value={oldPassword}
             onChange={(e) => setOldPassword(e.target.value)} />
+  
 
           <input type="password" className='input2' placeholder=" New Password" value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)} />
 
+
           <input type="password" className='input2' placeholder=" Confirm Password" value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)} />
 
+          <span style={{ color: "red", marginLeft: "3rem" }}>{error}</span>
 
           <button type='submit' >reset password</button>
-
-
-
         </form>
       </div>
-
-
-
     </div>
-
-  )
-
-}
+  )}

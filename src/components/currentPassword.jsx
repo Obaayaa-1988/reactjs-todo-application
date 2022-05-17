@@ -51,7 +51,7 @@ export const CurrentPassword = () => {
                 </div>}
                 <form onSubmit={change} >
                     <h4>Add A New Password</h4>
-                    <p style={{ color: "white" }}>Please enter your email and we will send you the a reset link</p>
+                    <p style={{ color: "white" }}>Enter Your New Password</p>
 
                     <input type="password" className='input2' placeholder=" New Password" value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)} />
