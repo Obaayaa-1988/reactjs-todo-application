@@ -8,20 +8,21 @@ export default function TodoLogin() {
   const [password, setPassword] = useState("")
   const [emailError, setEmailError] = useState("")
   const [passwordError, setPasswordError] = useState("")
-  const [ errorMessage, setErrorMessage] = useState("")
+  const [errorMessage, setErrorMessage] = useState("")
+  const [error, setError] = useState("");
 
 
   const login = async (e) => {
     try {
       if (email === '') {
-        setEmailError('email is required')
+        return setEmailError('email is required')
       }
 
-      if(password === ''){
-        setPasswordError('password required')
+      if (password === '') {
+        return setPasswordError('password required')
       }
 
-      
+
       e.preventDefault();
       const response = await axios.post("http://localhost:8080/login", {
         email,
@@ -34,13 +35,10 @@ export default function TodoLogin() {
 
       const { data } = response;
       console.log(data)
-      // if(data.response = "Incorrect Password"){
-      //   setPasswordError("Incorrect Password")
-      // }
 
-      if(data.response = "Email doesn\'t exist please sign up"){
-        setErrorMessage('Email doesn\'t exist please sign up')
-      }
+       if(data.response = "Email or password doesn\'t exist please sign up"){
+         setError('Email or password doesn\'t exist please sign up')
+       }
 
       console.log(data.user)
       if (data.user) {
@@ -51,43 +49,35 @@ export default function TodoLogin() {
 
     } catch (error) {
       console.log(error)
-
-      // if(error.message.includes('401')){
-      //   setErrorMessage('email doesnt exist')
+      // if (error.message.includes("401")) {
+      //   setError("Email or password does not exist");
       // }
 
-     
+
 
     }
   }
   return (
     <div className='back'>
-     <h2>{errorMessage}</h2>
+      <h2>{errorMessage}</h2>
       <div className='outer-form'>
         <form onSubmit={login} >
           <h4>LOG IN</h4>
 
           <i class="fa fa-user"></i>
-         
+
           <input type="email" className='input2' placeholder="Email" value={email}
             onChange={(e) => setEmail(e.target.value)} />
-            
-             {
-            !email && (
-              <span style={{ color: "red", marginLeft: "3rem" }}>{errorMessage}</span>
-            )
-          }
 
-         {/* 
-           {
+          {
             !email && (
               <span style={{ color: "red", marginLeft: "3rem" }}>{emailError}</span>
             )
-          }  */}
+          }
+
+        
           <input type="password" className='input2' placeholder="Password" value={password}
             onChange={(e) => setPassword(e.target.value)} />
-
-          {/* <span style={{ color: "red", marginLeft: "3rem" }}>{passwordError}</span> */}
 
           {
             !password && (
@@ -95,12 +85,15 @@ export default function TodoLogin() {
             )
           }
 
+          <span style={{ color: "red", marginLeft: "3rem" }}>{error}</span>
+
+
           <p> Don't have an account? <NavLink to="/todoRegister">SignUp</NavLink></p>
           <p>  <NavLink to="/forgotPassword">Forgot Password?</NavLink></p>
 
 
           <button type='submit' onClick={login}>LogIn</button>
-          
+
         </form>
       </div>
     </div>

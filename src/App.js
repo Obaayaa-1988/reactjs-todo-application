@@ -255,7 +255,8 @@ function App() {
     <div>
       
       <button className='btn1' onClick={logout}>logout</button> 
-      <Link to="/reset" style={{marginLeft:"1rem"}}> change password</Link>
+
+      <Link to="/reset" style={{marginLeft:"1rem"}} className="change"> change password</Link>
 
      
 

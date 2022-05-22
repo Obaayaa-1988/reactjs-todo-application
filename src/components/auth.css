@@ -108,3 +108,13 @@ body{
   color: white;
   font-weight: bolder;
 }
+
+.change{
+  text-decoration: none;
+  border: 1px solid black;
+  border-radius: 5px;
+  color: white;
+  padding: 0.5rem 2rem;
+  background-color: blueviolet;
+cursor: pointer;
+}

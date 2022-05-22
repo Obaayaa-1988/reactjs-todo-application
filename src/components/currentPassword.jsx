@@ -61,8 +61,6 @@ export const CurrentPassword = () => {
 
                     <button type='submit' >Send</button>
 
-
-
                 </form>
             </div>
 

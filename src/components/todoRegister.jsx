@@ -5,28 +5,34 @@ import { NavLink, useNavigate } from 'react-router-dom'
 
 export default function TodoRegister() {
   const history = useNavigate();
-  const [ username, setUsername ] = useState("")
-  const [ email, setEmail ] = useState("")
-  const[ emailError, setEmailError] =useState("")
-  const [ password, setPassword ] = useState("")
-  const [ errorMessage, setErrorMessage] = useState("")
- const [ passwordError, setPasswordError ] = useState("")
-  
+  const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
+  const [emailError, setEmailError] = useState("")
+  const [confirmPassword, setconfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const [password, setPassword] = useState("")
+  const [errorMessage1, setErrorMessage1] = useState("")
+  const [passwordError, setPasswordError] = useState("")
 
-//the backend is also structured to connect with the frontend using the localhost of the backend and axios
-//withCredentials means
-//history("/app") after signing redirect you to the application page
-//username and setUsername state allow us to grab the user's name from that input field with the e.target.value
-//same for the other input fields too
+
+  //the backend is also structured to connect with the frontend using the localhost of the backend and axios
+  //withCredentials means
+  //history("/app") after signing redirect you to the application page
+  //username and setUsername state allow us to grab the user's name from that input field with the e.target.value
+  //same for the other input fields too
 
   const signup = async (e) => {
     try {
       e.preventDefault();
-      if(email === ''){
+      if (email === '') {
         setEmailError("please enter your email")
-      } else if ( password === ''){
-        setPasswordError('password required')
+      } else if (password === '') {
+        setPasswordError('please enter your password')
 
+      } else if (confirmPassword === "") {
+        setError('please confirm your password')
+      } else {
+        console.log("signUp")
       }
 
       const response = await axios.post("http://localhost:8080/signup", {
@@ -35,7 +41,7 @@ export default function TodoRegister() {
         password,
 
       },
-      { withCredentials: true }  
+        { withCredentials: true }
       );
 
       const { data } = response;
@@ -54,74 +60,85 @@ export default function TodoRegister() {
       // }
 
 
-      if(data.user) {
+      if (data.user) {
         history("/")
       }
-      
+
     } catch (error) {
       console.log(error)
 
-      if(error.message.includes('409')){
-        setErrorMessage('email already exist')
+      if (error.message.includes('409')) {
+        setErrorMessage1('email already exist please login')
       }
 
-      if(error.message.includes('400')){
-        setErrorMessage(' email required')
-      }
+      // if (error.message.includes('400')) {
+      //   setErrorMessage(' email required')
+      // }
 
-      if(error.message.includes('409')){
-        setPasswordError(' password required')
-      }
-      
+      // if (error.message.includes('409')) {
+      //   setPasswordError(' password required')
+      // }
+
     }
   }
 
   return (
-    
-      <div className='back'>
 
-        <div className='outer-form'>
-          <form onSubmit={signup}>
-            <h4>SIGN IN</h4>
-            <i class="fa fa-user"></i>
-            <input type="text" className='input1' placeholder="Username" value={username}
+    <div className='back'>
+
+      <div className='outer-form'>
+        <form onSubmit={signup}>
+          <h4>SIGN IN</h4>
+          <i class="fa fa-user"></i>
+          <input type="text" className='input1' placeholder="Username" value={username}
             onChange={(e) => setUsername(e.target.value)} />
 
-            {
-              !email && (
-                <span style={{color: "red", marginLeft: "3rem" }}>{emailError}</span>
-              )
-            }
 
-            <input type="email" className='input2' placeholder="Email" value={email} 
+
+          <input type="email" className='input2' placeholder="Email" value={email}
             onChange={(e) => setEmail(e.target.value)} />
-             
-            {
-              !email && (
-                <span style={{color: "red", marginLeft: "3rem" }}>{errorMessage}</span>
-              )
-            }
-            
+          {
+            !email && (
+              <span style={{ color: "red", marginLeft: "3rem" }}>{emailError}</span>
+            )
+          }
+          <span style={{ color: "red", marginLeft: "3rem" }}>{errorMessage1}</span>
 
-            <input type="password" className='input2' placeholder="Password" value={password}
+
+
+          <input type="password" className='input2' placeholder="Password" value={password}
             onChange={(e) => setPassword(e.target.value)} />
-            {
-              !password && (
-                <span style={{color: "red", marginLeft: "3rem" }}>{passwordError}</span>
 
-              )
-            }
-            <input type="password" className='input2' placeholder=" Confirm Password" />
-            <p> Been here before? <NavLink to="/">LogIn</NavLink></p>
-
-            <button type='submit'  onClick={ signup }>Sign In</button>
-
-          </form>
-        </div>
+          <span style={{ color: "red", marginLeft: "3rem" }}>{passwordError}</span>
 
 
- </div>
-    
+          {
+            !password && (
+              <span style={{ color: "red", marginLeft: "3rem" }}>{passwordError}</span>
+
+            )
+          }
+          <input type="password" className='input2' placeholder=" Confirm Password" value={confirmPassword}
+            onChange={(e) => setconfirmPassword(e.target.value)}
+          />
+          {
+            !confirmPassword && (
+              <span style={{ color: "red", marginLeft: "3rem" }}>{error}</span>
+
+            )
+          }
+
+
+          <p> Been here before? <NavLink to="/">LogIn</NavLink></p>
+
+          <button type='submit' onClick={signup}>Sign In</button>
+
+        </form>
+      </div>
+
+
+    </div>
+
   )
 }
 

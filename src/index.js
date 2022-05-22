@@ -11,6 +11,7 @@ import reportWebVitals from './reportWebVitals';
 import { ResetPassword } from './components/resetPassword';
 import { ForgotPassword } from './components/forgotPassword';
 import { CurrentPassword } from './components/currentPassword';
+import { VerifiedEmail } from './components/verifiedEmail';
 
 //baseurl where all 
 axios.defaults.baseURL = "http://localhost:8080/"
@@ -27,6 +28,8 @@ ReactDOM.render(
     <Route path='/reset' element={<ResetPassword />} />
     <Route path='/forgotPassword' element={<ForgotPassword />} />
     <Route path='/reset-password/:resetToken' element={<CurrentPassword />} />
+    <Route path='/verified-email/:confirmToken' element={<VerifiedEmail />} />
+
     <Route path='/app' element={<App />} />
 
     </Routes>
