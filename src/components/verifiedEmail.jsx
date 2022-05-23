@@ -4,29 +4,28 @@ import axios from "axios";
 
 
 export const VerifiedEmail = () => {
-    const history = useNavigate();
-
     const { confirmToken } = useParams;
 
+    const history = useNavigate();
 
-    const change = axios.get(`/verified-email/${confirmToken}`, {
+    const verified = axios.get(`/verified-email/${confirmToken}`, {
 
     });
 
-    if (change) {
+    if (verified) {
         console.log("success")
+
         window.setTimeout(() => {
             history('/');
         }, 6000);
     } else {
-        console.log("no data")
+        console.log("no details")
     }
 
     return (
-
         <div>
-            <div>
-                <h1>Verified User</h1>
+            <div className="ground" >
+                <h1>Verified User You Can Now Log In</h1>
 
             </div>
 

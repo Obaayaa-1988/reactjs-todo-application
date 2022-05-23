@@ -13,6 +13,8 @@ export default function TodoRegister() {
   const [password, setPassword] = useState("")
   const [errorMessage1, setErrorMessage1] = useState("")
   const [passwordError, setPasswordError] = useState("")
+  const [success, setSuccess] = useState("");
+
 
 
   //the backend is also structured to connect with the frontend using the localhost of the backend and axios
@@ -59,9 +61,12 @@ export default function TodoRegister() {
       //   setPasswordError(data)
       // }
 
-
-      if (data.user) {
-        history("/")
+      if (data) {
+        setSuccess(data.message)
+      //   window.setTimeout(() => {
+      //     history('/');
+      // }, 6000); 
+        
       }
 
     } catch (error) {
@@ -82,18 +87,16 @@ export default function TodoRegister() {
     }
   }
 
-  return (
-
-    <div className='back'>
-
+  return  (
+   <div className='back'>
+    
       <div className='outer-form'>
+      { success ? <div style={{ color: "white", marginLeft: "3rem" }}>{success}</div> : null}
         <form onSubmit={signup}>
           <h4>SIGN IN</h4>
-          <i class="fa fa-user"></i>
+          {/* <i class="fa fa-user"></i> */}
           <input type="text" className='input1' placeholder="Username" value={username}
             onChange={(e) => setUsername(e.target.value)} />
-
-
 
           <input type="email" className='input2' placeholder="Email" value={email}
             onChange={(e) => setEmail(e.target.value)} />
@@ -128,8 +131,7 @@ export default function TodoRegister() {
             )
           }
 
-
-          <p> Been here before? <NavLink to="/">LogIn</NavLink></p>
+          {/* <p> Been here before? <NavLink to="/">LogIn</NavLink></p> */}
 
           <button type='submit' onClick={signup}>Sign In</button>
 
@@ -138,6 +140,7 @@ export default function TodoRegister() {
 
 
     </div>
+
 
   )
 }

@@ -63,9 +63,9 @@ export const ResetPassword = () => {
   };
 
   return success ? (
-    <div>
+    <div className="ground">
       <h1>password successfully changed</h1>
-      <h2>login with new password</h2>
+      {/* <h2>login with new password</h2> */}
 
     </div>
   ) : (

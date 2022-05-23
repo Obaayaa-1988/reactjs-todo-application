@@ -6,7 +6,7 @@
   padding: 0;
 }
 body{
-  font-family: "Oswald";
+  font-family: "Poppins";
 }
 /* 
 .back{
@@ -80,7 +80,7 @@ body{
     cursor: pointer;
     border-radius: 5px;
     font-family: 'Oswald';
-    margin-left: 10rem;
+    margin-left: 7rem;
     margin-top: 2rem;
     font-weight: bolder;
   }
@@ -117,4 +117,20 @@ body{
   padding: 0.5rem 2rem;
   background-color: blueviolet;
 cursor: pointer;
+}
+
+
+.ground{
+  height: 100vh;
+  background-image: url(/src/image/pho1.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: black;
+  
 }

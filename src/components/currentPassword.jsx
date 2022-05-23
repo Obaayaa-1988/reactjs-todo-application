@@ -10,12 +10,29 @@ export const CurrentPassword = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState("");
+    const [error1, setError1] = useState("");
+
+    const [passwordError, setPassworError] = useState("");
+
 
     const { resetToken } = useParams;
 
 
     const change = async (e) => {
+
+
         try {
+            if (newPassword === "") {
+                setPassworError("new password required")
+            } else if (confirmPassword === "") {
+                setError1("confirm password required")
+
+            }
+
+            else if (confirmPassword !== newPassword) {
+                setError("passwords dont match")
+
+            }
 
             e.preventDefault();
             await axios.put(`/${resetToken}/reset-password`, {
@@ -27,8 +44,8 @@ export const CurrentPassword = () => {
 
             window.setTimeout(() => {
                 history('/');
-              }, 6000);
-        
+            }, 6000);
+
 
 
         } catch (error) {
@@ -39,8 +56,8 @@ export const CurrentPassword = () => {
     };
 
     return success ? (
-        <div >
-            <h1> success</h1>
+        <div  className="ground">
+            <h1> {success}</h1>
             <h2>please check email for password reset link</h2>
 
         </div>
@@ -55,9 +72,14 @@ export const CurrentPassword = () => {
 
                     <input type="password" className='input2' placeholder=" New Password" value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)} />
+                    <span style={{ color: "red", marginLeft: "3rem" }}>{passwordError}</span>
 
                     <input type="password" className='input2' placeholder=" Confirm New Password" value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)} />
+                    <span style={{ color: "red", marginLeft: "3rem" }}>{error1}</span>
+
+                    <span style={{ color: "red", marginLeft: "3rem" }}>{error}</span>
+
 
                     <button type='submit' >Send</button>
 
